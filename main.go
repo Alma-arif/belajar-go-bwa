@@ -12,7 +12,7 @@ import (
 
 func main() {
 
-	dsn := "root:root@tcp(127.0.0.1:3306)/ayo?charset=utf8mb4&parseTime=True&loc=Local"
+	dsn := "root:@tcp(127.0.0.1:3306)/ayo?charset=utf8mb4&parseTime=True&loc=Local"
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 
 	if err != nil {
@@ -50,9 +50,6 @@ func main() {
 	api := router.Group("/api/v1/")
 	api.POST("/users", userHandler.RegisterUser)
 	api.POST("/sessions", userHandler.Login)
-
-	api.POST("/usersfg", userHandler.RegisterUser)
-	api.POST("/sessionsfg", userHandler.Login)
 
 	router.Run()
 
