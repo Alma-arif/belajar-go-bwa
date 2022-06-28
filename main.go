@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	"membuat-api-bwa/auth"
 	"membuat-api-bwa/handler"
 	"membuat-api-bwa/user"
 
@@ -21,6 +22,9 @@ func main() {
 
 	userRepository := user.NewRepository(db)
 	userService := user.NewService(userRepository)
+	authService := auth.NewService()
+
+	// fmt.Println(authService.GenerateToken(1001))
 
 	// userService.SaveAvatar(1, "image/1-asd.png")
 	// input := user.LoginInput{
@@ -46,7 +50,7 @@ func main() {
 
 	// fmt.Println(userbyemail.Name)
 
-	userHandler := handler.NewUserHandler(userService)
+	userHandler := handler.NewUserHandler(userService, authService)
 
 	router := gin.Default()
 	api := router.Group("/api/v1/")
