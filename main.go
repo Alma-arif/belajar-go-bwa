@@ -24,6 +24,9 @@ func main() {
 	userService := user.NewService(userRepository)
 	authService := auth.NewService()
 
+	//
+	// token, err := authService.ValidateToken("")
+
 	// fmt.Println(authService.GenerateToken(1001))
 
 	// userService.SaveAvatar(1, "image/1-asd.png")
