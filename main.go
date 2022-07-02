@@ -29,51 +29,12 @@ func main() {
 	userRepository := user.NewRepository(db)
 	campaignRepository := campaign.NewRepository(db)
 
-	campaigns, err := campaignRepository.FindByUserID(1)
-
-	fmt.Println("debug")
-	fmt.Println("debug")
-	fmt.Println("debug")
-	fmt.Println(len(campaigns))
-	for _, campaign := range campaigns {
-		fmt.Println(campaign.Name)
-		if len(campaign.CampaignImages) > 0 {
-			fmt.Println(campaign.CampaignImages[0].FileName)
-		}
-
-	}
-
 	userService := user.NewService(userRepository)
+	campaignService := campaign.NewService(campaignRepository)
 	authService := auth.NewService()
 
-	//
-	// token, err := authService.ValidateToken("")
-
-	// fmt.Println(authService.GenerateToken(1001))
-
-	// userService.SaveAvatar(1, "image/1-asd.png")
-	// input := user.LoginInput{
-	// 	Email:    "kapan@kapan.com",
-	// 	Password: "haidiasd",
-	// }
-
-	// user, err := userService.Login(input)
-
-	// if err != nil {
-	// 	fmt.Println("terjadi kesalahan")
-	// 	fmt.Println(err.Error())
-	// }
-
-	// fmt.Println(user.Email)
-	// fmt.Println(user.Name)
-
-	// userbyemail, err := userRepository.FindByEmail("gin@mail.com")
-
-	// if err != nil {
-	// 	fmt.Println(err.Error())
-	// }
-
-	// fmt.Println(userbyemail.Name)
+	campaigns, _ := campaignService.FindCampaigns(0)
+	fmt.Println(len(campaigns))
 
 	userHandler := handler.NewUserHandler(userService, authService)
 
